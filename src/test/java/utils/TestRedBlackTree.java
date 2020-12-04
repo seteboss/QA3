@@ -28,4 +28,13 @@ public class TestRedBlackTree {
 				Assert.assertNull(node.left);
 				Assert.assertNull(node.right);
 		}
+
+		@Test
+		public void testConstructorTree(){
+				RedBlackTree<Integer> tree = new RedBlackTree<>();
+				Assert.assertEquals(tree.nil, tree.root);
+				Assert.assertEquals(tree.nil, tree.root.left);
+				Assert.assertEquals(tree.nil, tree.root.right);
+				Assert.assertEquals(tree.nil, tree.root.parent);
+		}
 }
