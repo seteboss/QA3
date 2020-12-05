@@ -368,4 +368,31 @@ public class TestRedBlackTree {
 				Assert.assertEquals(redBlackTree.root.right, redBlackTree.search(15));
 				Assert.assertEquals(redBlackTree.root.right.left, redBlackTree.search(14));
 		}
+
+		@Test
+		public void testRemove(){
+				redBlackTree.insert(10);
+				redBlackTree.insert(15);
+				redBlackTree.insert(13);
+				redBlackTree.insert(14);
+				redBlackTree.insert(8);
+				redBlackTree.insert(46);
+
+				RedBlackNode<Integer> node = redBlackTree.search(14);
+				redBlackTree.remove(node);
+				Assert.assertNull(redBlackTree.search(14));
+
+				node = redBlackTree.search(8);
+				redBlackTree.remove(node);
+				Assert.assertNull(redBlackTree.search(8));
+
+				node = redBlackTree.search(46);
+				redBlackTree.remove(node);
+				Assert.assertNull(redBlackTree.search(46));
+
+				node = redBlackTree.search(15);
+				redBlackTree.remove(node);
+				Assert.assertNull(redBlackTree.search(15));
+		}
+
 }
