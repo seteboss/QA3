@@ -82,4 +82,32 @@ public class TestRedBlackTree {
 				Assert.assertEquals(0, node2.numLeft);
 				Assert.assertEquals(0, node2.numRight);
 		}
+
+		@Test
+		public void testRightRotateFixup(){
+				RedBlackNode<Integer> root = createNode(10, 2, 0, 1);
+				RedBlackNode<Integer> node1 = createNode(8, 1, 0, 0);
+				node1.parent = root;
+				node1.right = redBlackTree.nil;
+				root.left = node1;
+				root.parent = redBlackTree.nil;
+				root.right = redBlackTree.nil;
+
+				RedBlackNode<Integer> node2 = createNode(7, 0, 0, 1);
+				node2.parent = node1;
+				node2.left = redBlackTree.nil;
+				node2.right = redBlackTree.nil;
+				node1.left = node2;
+
+				redBlackTree.root = root;
+				redBlackTree.rightRotateFixup(root);
+
+				Assert.assertEquals(0, root.numLeft);
+				Assert.assertEquals(0, root.numRight);
+				Assert.assertEquals(1, node1.numLeft);
+				Assert.assertEquals(1, node1.numRight);
+				Assert.assertEquals(0, node2.numLeft);
+				Assert.assertEquals(0, node2.numRight);
+		}
+
 }
