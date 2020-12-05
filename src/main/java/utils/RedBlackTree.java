@@ -227,4 +227,39 @@ public class RedBlackTree<T extends Comparable<T>> {
 				}
 				return y;
 		}
+
+		public void fixNodeData(RedBlackNode<T> x, RedBlackNode<T> y){
+				RedBlackNode<T> current = nil;
+				RedBlackNode<T> track = nil;
+
+				if (isNil(x)){
+						current = y.parent;
+						track = y;
+				}
+				else{
+						current = x.parent;
+						track = x;
+				}
+				while (!isNil(current)){
+						if (y.key != current.key) {
+								if (y.key.compareTo(current.key) > 0)
+										current.numRight--;
+								if (y.key.compareTo(current.key) < 0)
+										current.numLeft--;
+						}
+
+						else{
+								if (isNil(current.left))
+										current.numLeft--;
+								else if (isNil(current.right))
+										current.numRight--;
+								else if (track == current.right)
+												current.numRight--;
+										else if (track == current.left)
+														current.numLeft--;
+						}
+						track = current;
+						current = current.parent;
+				}
+		}
 }
