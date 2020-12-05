@@ -208,4 +208,10 @@ public class RedBlackTree<T extends Comparable<T>> {
 				}
 				root.color = RedBlackNode.BLACK;
 		}
+
+		public RedBlackNode<T> treeMinimum(RedBlackNode<T> node){
+				while (!isNil(node.left))
+						node = node.left;
+				return node;
+		}
 }
