@@ -214,4 +214,17 @@ public class RedBlackTree<T extends Comparable<T>> {
 						node = node.left;
 				return node;
 		}
+
+		public RedBlackNode<T> treeSuccessor(RedBlackNode<T> x) {
+				if (!isNil(x.left)) {
+						return treeMinimum(x.right);
+				}
+				RedBlackNode<T> y = x.parent;
+
+				while (!isNil(y) && x == y.right) {
+						x = y;
+						y = y.parent;
+				}
+				return y;
+		}
 }
