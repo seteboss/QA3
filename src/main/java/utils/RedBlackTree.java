@@ -262,4 +262,62 @@ public class RedBlackTree<T extends Comparable<T>> {
 						current = current.parent;
 				}
 		}
+
+		public void removeFixup(RedBlackNode<T> x){
+				RedBlackNode<T> w;
+				while (x != root && x.color == RedBlackNode.BLACK) {
+						if (x == x.parent.left) {
+								w = x.parent.right;
+								if (w.color == RedBlackNode.RED) {
+										w.color = RedBlackNode.BLACK;
+										x.parent.color = RedBlackNode.RED;
+										leftRotate(x.parent);
+										w = x.parent.right;
+								}
+								if (w.left.color == RedBlackNode.BLACK &&
+										w.right.color == RedBlackNode.BLACK) {
+										w.color = RedBlackNode.RED;
+										x = x.parent;
+								} else {
+										if (w.right.color == RedBlackNode.BLACK) {
+												w.left.color = RedBlackNode.BLACK;
+												w.color = RedBlackNode.RED;
+												rightRotate(w);
+												w = x.parent.right;
+										}
+										w.color = x.parent.color;
+										x.parent.color = RedBlackNode.BLACK;
+										w.right.color = RedBlackNode.BLACK;
+										leftRotate(x.parent);
+										x = root;
+								}
+						} else {
+								w = x.parent.left;
+								if (w.color == RedBlackNode.RED) {
+										w.color = RedBlackNode.BLACK;
+										x.parent.color = RedBlackNode.RED;
+										rightRotate(x.parent);
+										w = x.parent.left;
+								}
+								if (w.right.color == RedBlackNode.BLACK &&
+										w.left.color == RedBlackNode.BLACK) {
+										w.color = RedBlackNode.RED;
+										x = x.parent;
+								} else {
+										if (w.left.color == RedBlackNode.BLACK) {
+												w.right.color = RedBlackNode.BLACK;
+												w.color = RedBlackNode.RED;
+												leftRotate(w);
+												w = x.parent.left;
+										}
+										w.color = x.parent.color;
+										x.parent.color = RedBlackNode.BLACK;
+										w.left.color = RedBlackNode.BLACK;
+										rightRotate(x.parent);
+										x = root;
+								}
+						}
+				}
+				x.color = RedBlackNode.BLACK;
+		}
 }
