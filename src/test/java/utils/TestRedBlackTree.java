@@ -247,4 +247,15 @@ public class TestRedBlackTree {
 				Assert.assertEquals(1, nodeLeft2.color);
 
 		}
+
+		@Test
+		public void testTreeMinimum(){
+				redBlackTree.insert(10);
+				redBlackTree.insert(15);
+				redBlackTree.insert(13);
+				redBlackTree.insert(14);
+				RedBlackNode<Integer> node = redBlackTree.root.right;
+				RedBlackNode<Integer> nodeMin = node.left;
+				Assert.assertEquals(nodeMin, redBlackTree.treeMinimum(node));
+		}
 }
