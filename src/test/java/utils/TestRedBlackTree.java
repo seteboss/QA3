@@ -315,4 +315,44 @@ public class TestRedBlackTree {
 				Assert.assertEquals(0, root.numLeft);
 				Assert.assertEquals(2, root.numRight);
 		}
+
+		@Test
+		public void testRemoveFixup(){
+				RedBlackNode<Integer> node1 = createNode(13, 1, 2, 0);
+				RedBlackNode<Integer> node2 = createNode(15, 1, 0, 0);
+				RedBlackNode<Integer> node3 = createNode(14, 0, 0, 1);
+				RedBlackNode<Integer> x = createNodeWithNull(0,0,0);
+				RedBlackNode<Integer> y = createNode(10, 0,0,0);
+				y.parent = node1;
+				y.right = redBlackTree.nil;
+				y.left = redBlackTree.nil;
+
+				x.parent = node1;
+				x.left = redBlackTree.nil;
+				x.right = redBlackTree.nil;
+
+				node1.parent = redBlackTree.nil;
+				node1.left = redBlackTree.nil;
+				node1.right = node2;
+
+				node2.parent = node1;
+				node2.left = node3;
+				node2.right = redBlackTree.nil;
+
+				node3.parent = node2;
+				node3.left = redBlackTree.nil;
+				node3.right = redBlackTree.nil;
+				redBlackTree.root = node1;
+				redBlackTree.fixNodeData(x,y);
+
+				redBlackTree.removeFixup(x);
+				RedBlackNode<Integer> root  = redBlackTree.root;
+
+				Assert.assertEquals(13, root.key.intValue());
+				Assert.assertEquals(0, root.color);
+				Assert.assertEquals(15, root.right.key.intValue());
+				Assert.assertEquals(0, root.right.color);
+				Assert.assertEquals(14, root.right.left.key.intValue());
+				Assert.assertEquals(1, root.right.left.color);
+		}
 }
