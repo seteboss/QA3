@@ -320,4 +320,20 @@ public class RedBlackTree<T extends Comparable<T>> {
 				}
 				x.color = RedBlackNode.BLACK;
 		}
+
+		public RedBlackNode<T> search(T key){
+
+				RedBlackNode<T> current = root;
+				while (!isNil(current)){
+						if (current.key.equals(key))
+								return current;
+
+						else if (current.key.compareTo(key) < 0)
+								current = current.right;
+
+						else
+								current = current.left;
+				}
+				return null;
+		}
 }
