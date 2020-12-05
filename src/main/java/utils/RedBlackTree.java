@@ -104,6 +104,31 @@ public class RedBlackTree<T extends Comparable<T>> {
 								}
 						}
 				}
+		}
 
+		public void rightRotate(RedBlackNode<T> y) {
+
+				System.out.println("rightRotate in Node with key: " + y.key);
+
+				rightRotateFixup(y);
+
+				RedBlackNode<T> x = y.left;
+				y.left = x.right;
+
+				if (!isNil(x.right)) {
+						x.right.parent = y;
+				}
+				x.parent = y.parent;
+				if (isNil(y.parent)) {
+						root = x;
+				} else {
+						if (y.parent.right == y) {
+								y.parent.right = x;
+						} else {
+								y.parent.left = x;
+						}
+				}
+				x.right = y;
+				y.parent = x;
 		}
 }
