@@ -131,4 +131,46 @@ public class RedBlackTree<T extends Comparable<T>> {
 				x.right = y;
 				y.parent = x;
 		}
+
+		public void insertFixup(RedBlackNode<T> z) {
+				RedBlackNode<T> y = nil;
+				while (z.parent.color == RedBlackNode.RED) {
+						if (z.parent == z.parent.parent.left) {
+								y = z.parent.parent.right;
+								if (y.color == RedBlackNode.RED) {
+										z.parent.color = RedBlackNode.BLACK;
+										y.color = RedBlackNode.BLACK;
+										z.parent.parent.color = RedBlackNode.RED;
+										z = z.parent.parent;
+								} else {
+										if (z == z.parent.right) {
+												z = z.parent;
+												leftRotate(z);
+										} else {
+												z.parent.color = RedBlackNode.BLACK;
+												z.parent.parent.color = RedBlackNode.RED;
+												rightRotate(z.parent.parent);
+										}
+								}
+						} else {
+								y = z.parent.parent.left;
+								if (y.color == RedBlackNode.RED) {
+										z.parent.color = RedBlackNode.BLACK;
+										y.color = RedBlackNode.BLACK;
+										z.parent.parent.color = RedBlackNode.RED;
+										z = z.parent.parent;
+								} else {
+										if (z == z.parent.left) {
+												z = z.parent;
+												rightRotate(z);
+										} else {
+												z.parent.color = RedBlackNode.BLACK;
+												z.parent.parent.color = RedBlackNode.RED;
+												leftRotate(z.parent.parent);
+										}
+								}
+						}
+				}
+				root.color = RedBlackNode.BLACK;
+		}
 }
