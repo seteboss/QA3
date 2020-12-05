@@ -258,4 +258,19 @@ public class TestRedBlackTree {
 				RedBlackNode<Integer> nodeMin = node.left;
 				Assert.assertEquals(nodeMin, redBlackTree.treeMinimum(node));
 		}
+
+		@Test
+		public void testTreeSuccessor(){
+				redBlackTree.insert(10);
+				redBlackTree.insert(15);
+				redBlackTree.insert(13);
+				redBlackTree.insert(14);
+
+				RedBlackNode<Integer> root = redBlackTree.root;
+				RedBlackNode<Integer> node1 = redBlackTree.treeSuccessor(root);
+				Assert.assertEquals(14, node1.key.intValue());
+
+				RedBlackNode<Integer> node2 = redBlackTree.treeSuccessor(node1);
+				Assert.assertEquals(15, node2.key.intValue());
+		}
 }
