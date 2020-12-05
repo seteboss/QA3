@@ -16,6 +16,14 @@ public class TestRedBlackTree {
 				return node;
 		}
 
+		public RedBlackNode<Integer> createNodeWithNull(int numLeft, int numRight, int color){
+				RedBlackNode<Integer> node = new RedBlackNode<>(null);
+				node.setNumLeft(numLeft);
+				node.setNumRight(numRight);
+				node.setColor(color);
+				return node;
+		}
+
 		@Test
 		public void testConstructorNodeWithoutKey(){
 				RedBlackNode<Integer> node = new RedBlackNode<>();
@@ -272,5 +280,39 @@ public class TestRedBlackTree {
 
 				RedBlackNode<Integer> node2 = redBlackTree.treeSuccessor(node1);
 				Assert.assertEquals(15, node2.key.intValue());
+		}
+
+		@Test
+		public void testFixNodeData(){
+				RedBlackNode<Integer> node1 = createNode(13, 1, 2, 0);
+				RedBlackNode<Integer> node2 = createNode(15, 1, 0, 0);
+				RedBlackNode<Integer> node3 = createNode(14, 0, 0, 1);
+				RedBlackNode<Integer> x = createNodeWithNull(0,0,0);
+				RedBlackNode<Integer> y = createNode(10, 0,0,0);
+				y.parent = node1;
+				y.right = redBlackTree.nil;
+				y.left = redBlackTree.nil;
+
+				x.parent = node1;
+				x.left = redBlackTree.nil;
+				x.right = redBlackTree.nil;
+
+				node1.parent = redBlackTree.nil;
+				node1.left = redBlackTree.nil;
+				node1.right = node2;
+
+				node2.parent = node1;
+				node2.left = node3;
+				node2.right = redBlackTree.nil;
+
+				node3.parent = node2;
+				node3.left = redBlackTree.nil;
+				node3.right = redBlackTree.nil;
+				redBlackTree.root = node1;
+				redBlackTree.fixNodeData(x,y);
+
+				RedBlackNode<Integer> root  = redBlackTree.root;
+				Assert.assertEquals(0, root.numLeft);
+				Assert.assertEquals(2, root.numRight);
 		}
 }
