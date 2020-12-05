@@ -48,4 +48,34 @@ public class RedBlackTree<T extends Comparable<T>> {
 				}
 
 		}
+
+		public void rightRotateFixup(RedBlackNode y) {
+
+				if (isNil(y.right) && isNil(y.left.right)) {
+						y.numRight = 0;
+						y.numLeft = 0;
+						y.left.numRight = 1;
+				} else {
+						if (isNil(y.right) && !isNil(y.left.right)) {
+								y.numRight = 0;
+								y.numLeft = 1 + y.left.right.numRight +
+										y.left.right.numLeft;
+								y.left.numRight = 2 + y.left.right.numRight +
+										y.left.right.numLeft;
+						} else {
+								if (!isNil(y.right) && isNil(y.left.right)) {
+										y.numLeft = 0;
+										y.left.numRight = 2 + y.right.numRight + y.right.numLeft;
+
+								} else {
+										y.numLeft = 1 + y.left.right.numRight +
+												y.left.right.numLeft;
+										y.left.numRight = 3 + y.right.numRight +
+												y.right.numLeft +
+												y.left.right.numRight + y.left.right.numLeft;
+								}
+						}
+				}
+
+		}
 }
