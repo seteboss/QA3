@@ -336,4 +336,33 @@ public class RedBlackTree<T extends Comparable<T>> {
 				}
 				return null;
 		}
+
+		public void remove(RedBlackNode<T> v){
+				RedBlackNode<T> z = search(v.key);
+
+				RedBlackNode<T> x = nil;
+				RedBlackNode<T> y = nil;
+
+				if (isNil(z.left) || isNil(z.right))
+						y = z;
+				else y = treeSuccessor(z);
+				if (!isNil(y.left))
+						x = y.left;
+				else
+						x = y.right;
+				x.parent = y.parent;
+
+				if (isNil(y.parent))
+						root = x;
+				else if (!isNil(y.parent.left) && y.parent.left == y)
+						y.parent.left = x;
+				else if (!isNil(y.parent.right) && y.parent.right == y)
+								y.parent.right = x;
+				if (y != z){
+						z.key = y.key;
+				}
+				fixNodeData(x,y);
+				if (y.color == RedBlackNode.BLACK)
+						removeFixup(x);
+		}
 }
