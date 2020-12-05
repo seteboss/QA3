@@ -14,4 +14,9 @@ public class RedBlackTree<T extends Comparable<T>> {
 				root.right = nil;
 				root.parent = nil;
 		}
+
+
+		boolean isNil(RedBlackNode node) {
+				return node == nil;
+		}
 }
