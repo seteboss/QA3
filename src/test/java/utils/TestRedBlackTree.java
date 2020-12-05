@@ -214,4 +214,37 @@ public class TestRedBlackTree {
 				Assert.assertEquals(0, node2.numLeft);
 				Assert.assertEquals(0, node2.numRight);
 		}
+
+		@Test
+		public void testInsert(){
+				redBlackTree.insert(10);
+				redBlackTree.insert(15);
+				redBlackTree.insert(13);
+				redBlackTree.insert(14);
+
+				RedBlackNode<Integer> root = redBlackTree.root;
+				Assert.assertEquals(1, root.numLeft);
+				Assert.assertEquals(2, root.numRight);
+				Assert.assertEquals(13, root.key.intValue());
+				Assert.assertEquals(0, root.color);
+
+				RedBlackNode<Integer> node1 = root.left;
+				Assert.assertEquals(0, node1.numLeft);
+				Assert.assertEquals(0, node1.numRight);
+				Assert.assertEquals(10, node1.key.intValue());
+				Assert.assertEquals(0, node1.color);
+
+				RedBlackNode<Integer> node2 = root.right;
+				Assert.assertEquals(1, node2.numLeft);
+				Assert.assertEquals(0, node2.numRight);
+				Assert.assertEquals(15, node2.key.intValue());
+				Assert.assertEquals(0, node2.color);
+
+				RedBlackNode<Integer> nodeLeft2 = node2.left;
+				Assert.assertEquals(0, nodeLeft2.numLeft);
+				Assert.assertEquals(0, nodeLeft2.numRight);
+				Assert.assertEquals(14, nodeLeft2.key.intValue());
+				Assert.assertEquals(1, nodeLeft2.color);
+
+		}
 }
