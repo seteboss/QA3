@@ -355,4 +355,17 @@ public class TestRedBlackTree {
 				Assert.assertEquals(14, root.right.left.key.intValue());
 				Assert.assertEquals(1, root.right.left.color);
 		}
+
+		@Test
+		public void testSearch(){
+				redBlackTree.insert(10);
+				redBlackTree.insert(15);
+				redBlackTree.insert(13);
+				redBlackTree.insert(14);
+
+				Assert.assertEquals(redBlackTree.root, redBlackTree.search(13));
+				Assert.assertEquals(redBlackTree.root.left, redBlackTree.search(10));
+				Assert.assertEquals(redBlackTree.root.right, redBlackTree.search(15));
+				Assert.assertEquals(redBlackTree.root.right.left, redBlackTree.search(14));
+		}
 }
