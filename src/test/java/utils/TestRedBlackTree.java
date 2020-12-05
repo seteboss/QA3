@@ -6,6 +6,9 @@ import org.junit.Test;
 
 public class TestRedBlackTree {
 
+		RedBlackTree<Integer> redBlackTree = new RedBlackTree<>();
+
+
 		@Test
 		public void testConstructorNodeWithoutKey(){
 				RedBlackNode<Integer> node = new RedBlackNode<>();
@@ -36,5 +39,13 @@ public class TestRedBlackTree {
 				Assert.assertEquals(tree.nil, tree.root.left);
 				Assert.assertEquals(tree.nil, tree.root.right);
 				Assert.assertEquals(tree.nil, tree.root.parent);
+		}
+
+		@Test
+		public void testIsNil(){
+				RedBlackNode<Integer> node = redBlackTree.root;
+				RedBlackNode<Integer> nodeWithKey = new RedBlackNode<>(1);
+				Assert.assertTrue(redBlackTree.isNil(node));
+				Assert.assertFalse(redBlackTree.isNil(nodeWithKey));
 		}
 }
