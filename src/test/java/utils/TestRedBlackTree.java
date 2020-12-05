@@ -8,6 +8,13 @@ public class TestRedBlackTree {
 
 		RedBlackTree<Integer> redBlackTree = new RedBlackTree<>();
 
+		public RedBlackNode<Integer> createNode(int key, int numLeft, int numRight, int color){
+				RedBlackNode<Integer> node = new RedBlackNode<>(key);
+				node.setNumLeft(numLeft);
+				node.setNumRight(numRight);
+				node.setColor(color);
+				return node;
+		}
 
 		@Test
 		public void testConstructorNodeWithoutKey(){
@@ -47,5 +54,32 @@ public class TestRedBlackTree {
 				RedBlackNode<Integer> nodeWithKey = new RedBlackNode<>(1);
 				Assert.assertTrue(redBlackTree.isNil(node));
 				Assert.assertFalse(redBlackTree.isNil(nodeWithKey));
+		}
+
+		@Test
+		public void testLeftRotateFixup(){
+				RedBlackNode<Integer> root = createNode(10, 0, 2, 1);
+				RedBlackNode<Integer> node1 = createNode(13, 0, 1, 0);
+				node1.parent = root;
+				node1.left = redBlackTree.nil;
+				root.right = node1;
+				root.parent = redBlackTree.nil;
+				root.left = redBlackTree.nil;
+
+				RedBlackNode<Integer> node2 = createNode(15, 0, 0, 1);
+				node2.parent = node1;
+				node2.left = redBlackTree.nil;
+				node2.right = redBlackTree.nil;
+				node1.right = node2;
+
+				redBlackTree.root = root;
+				redBlackTree.leftRotateFixup(root);
+
+				Assert.assertEquals(0, root.numLeft);
+				Assert.assertEquals(0, root.numRight);
+				Assert.assertEquals(1, node1.numLeft);
+				Assert.assertEquals(1, node1.numRight);
+				Assert.assertEquals(0, node2.numLeft);
+				Assert.assertEquals(0, node2.numRight);
 		}
 }
