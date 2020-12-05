@@ -110,4 +110,37 @@ public class TestRedBlackTree {
 				Assert.assertEquals(0, node2.numRight);
 		}
 
+		@Test
+		public void testLeftRotate(){
+				RedBlackNode<Integer> root = createNode(10, 0, 2, 1);
+				RedBlackNode<Integer> node1 = createNode(13, 0, 1, 0);
+				node1.parent = root;
+				node1.left = redBlackTree.nil;
+				root.right = node1;
+				root.parent = redBlackTree.nil;
+				root.left = redBlackTree.nil;
+
+				RedBlackNode<Integer> node2 = createNode(15, 0, 0, 1);
+				node2.parent = node1;
+				node2.left = redBlackTree.nil;
+				node2.right = redBlackTree.nil;
+				node1.right = node2;
+
+				redBlackTree.root = root;
+				redBlackTree.leftRotate(root);
+
+				Assert.assertEquals(redBlackTree.nil, node1.parent);
+				Assert.assertEquals(root, node1.left);
+				Assert.assertEquals(node2, node1.right);
+
+				Assert.assertEquals(node1, root.parent);
+				Assert.assertEquals(redBlackTree.nil, root.left);
+				Assert.assertEquals(redBlackTree.nil, root.right);
+
+				Assert.assertEquals(node1, node2.parent);
+				Assert.assertEquals(redBlackTree.nil, node2.left);
+				Assert.assertEquals(redBlackTree.nil, node2.right);
+
+		}
+
 }
