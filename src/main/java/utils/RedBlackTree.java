@@ -132,6 +132,41 @@ public class RedBlackTree<T extends Comparable<T>> {
 				y.parent = x;
 		}
 
+		public void insert(T key) {
+				insert(new RedBlackNode<T>(key));
+		}
+
+		private void insert(RedBlackNode<T> z) {
+
+				RedBlackNode<T> y = nil;
+				RedBlackNode<T> x = root;
+
+				while (!isNil(x)) {
+						y = x;
+						if (z.key.compareTo(x.key) < 0) {
+								x.numLeft++;
+								x = x.left;
+						} else {
+								x.numRight++;
+								x = x.right;
+						}
+				}
+				z.parent = y;
+				if (isNil(y)) {
+						root = z;
+				} else {
+						if (z.key.compareTo(y.key) < 0) {
+								y.left = z;
+						} else {
+								y.right = z;
+						}
+				}
+				z.left = nil;
+				z.right = nil;
+				z.color = RedBlackNode.RED;
+				insertFixup(z);
+		}
+
 		public void insertFixup(RedBlackNode<T> z) {
 				RedBlackNode<T> y = nil;
 				while (z.parent.color == RedBlackNode.RED) {
